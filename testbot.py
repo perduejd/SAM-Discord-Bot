@@ -95,49 +95,32 @@ async def play_music(ctx, url):
         await ctx.send("You need to be in a voice channel to use this command.")
 
 
-# Run the bot with your token
-bot.run('MTE2MzkwODk0MzIxNTYwNzgwOA.GWH3bK.9y-b9XVIRtdX7DYiMwuzIr-9UnM-ag2D-wgFcE')
-
-
-
-#Pause command: !pause
-voice_channel = ctx.author.voice.channel
-
+# Command: !pause
+@bot.command()
 async def pause(ctx):
-    voice_channel = ctx.author.voice.channel
+    voice_client = ctx.voice_client
 
-    if voice_channel:
-        voice_client = await voice_channel.connect()
-
-        if voice_client.is_playing():
-            voice_client.pause()
-            await ctx.send('Current song playing paused.')
-        else:
-            await ctx.send('No song playing.')
-        
-        await voice_client.disconnect()
+    if voice_client and voice_client.is_playing():
+        voice_client.pause()
+        await ctx.send('Song paused.')
+    elif voice_client and voice_client.is_paused():
+        await ctx.send('The song is already paused.')
+    else:
+        await ctx.send('No song is playing.')
 
 
-# Resume song command: !resume
+# Command: !resume
+@bot.command()
 async def resume(ctx):
-    
-    resume_text = "Resumes playing the current song."
-    await ctx.send(resume_text)
+    voice_client = ctx.voice_client
 
-
-#Skip command: !skip
-async def skip(ctx):
-    voice_channel = ctx.author.voice.channel
-
-    if voice_channel:
-        voice_client = await voice_channel.connect() #Connects to channel
-
-        if voice_client.is_playing():
-            voice_client.stop()
-            await ctx.send('Skipped the current song playing.')
-        else:
-            await ctx.send('No song is playing.')
-
+    if voice_client and voice_client.is_paused():
+        voice_client.resume()
+        await ctx.send('Song resumed.')
+    elif voice_client and voice_client.is_playing():
+        await ctx.send('The song is already playing.')
+    else:
+        await ctx.send('No song is paused.')
 
 
 # WILL NEED TO IMPLEMENT THIS AT THE END ONCE ALL OF OUR COMMANDS ARE COMPLETED AND FULLY FUNCTIONAL
@@ -154,9 +137,8 @@ async def help(ctx):
     help_embed.add_field(name='!command', value='Description', inline=False)
     help_embed.add_field(name='!command', value='Description', inline=False)
     help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
     await ctx.send(embed=help_embed)
+
+
+# Run the bot with your token
+bot.run('MTE2MzkwODk0MzIxNTYwNzgwOA.GWH3bK.9y-b9XVIRtdX7DYiMwuzIr-9UnM-ag2D-wgFcE')

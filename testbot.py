@@ -14,10 +14,35 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Logged in as {bot.user.name}')
 
+# Event: Welcomes a member when they join the guild
+@bot.event
+async def on_member_join(member):
+    channel = member.guild.get_channel(1163910076311023729)
+    if channel:
+        welcome_message = f'Welcome to the server, {member.mention}!'
+        await channel.send(welcome_message)
+
 # Command: !hello
 @bot.command()
 async def hello(ctx):
     await ctx.send('Hello, I am your Discord bot!')
+
+# Command: !join, bot joins the voice channel the author is in
+@bot.command()
+async def join(ctx):
+    if ctx.author.voice:
+        channel = ctx.author.voice.channel
+        voice_channel = await channel.connect()
+    else:
+        await ctx.send("You need to be in a voice channel to use this command.")
+
+# Command: !leave, bot leaves the voice channel it is in
+@bot.command()
+async def leave(ctx):
+    if ctx.voice_client:
+        await ctx.voice_client.disconnect()
+    else:
+        await ctx.send("I'm not connected to a voice channel.")
 
 # Run the bot with your token
 bot.run('MTE2MzkwODk0MzIxNTYwNzgwOA.GWH3bK.9y-b9XVIRtdX7DYiMwuzIr-9UnM-ag2D-wgFcE')

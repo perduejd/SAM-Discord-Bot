@@ -72,6 +72,13 @@ async def help(ctx):
         description='Current List of available commands:',
         color=discord.Color.blue()
     ) # Bot commands and their purposes of the Server
+    help_embed.add_field(name='!command', value='Description', inline=False) # For !command enter the command and for 'Description enter what the command does'
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
     help_embed.add_field(name='!command', value='Description', inline=False)
     help_embed.add_field(name='!command', value='Description', inline=False)
     help_embed.add_field(name='!command', value='Description', inline=False)

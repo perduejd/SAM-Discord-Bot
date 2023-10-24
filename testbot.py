@@ -62,3 +62,18 @@ async def skip(ctx):
         else:
             await ctx.send('No song is playing.')
 
+
+
+# WILL NEED TO IMPLEMENT THIS AT THE END ONCE ALL OF OUR COMMANDS ARE COMPLETED AND FULLY FUNCTIONAL
+#help command: !help  
+async def help(ctx):
+    help_embed = discord.Embed(
+        title='SAM Bot Commands',
+        description='Current List of available commands:',
+        color=discord.Color.blue()
+    ) # Bot commands and their purposes of the Server
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!command', value='Description', inline=False)
+    await ctx.send(embed=help_embed)

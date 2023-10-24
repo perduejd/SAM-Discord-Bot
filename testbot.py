@@ -124,21 +124,24 @@ async def resume(ctx):
     else:
         await ctx.send('No song is paused.')
 
-
-# WILL NEED TO IMPLEMENT THIS AT THE END ONCE ALL OF OUR COMMANDS ARE COMPLETED AND FULLY FUNCTIONAL
 #help command: !help  
-async def help(ctx):
+@bot.command()
+async def helpme(ctx):
     help_embed = discord.Embed(
-        title='SAM Bot Commands',
-        description='Current List of available commands:',
+        title='Available Commands',
+        description='List of available commands and their descriptions:',
         color=discord.Color.blue()
-    ) # Bot commands and their purposes of the Server
-    help_embed.add_field(name='!hello', value='Welcomes user to the channel.', inline=False) # For !command enter the command and for 'Description enter what the command does'
-    help_embed.add_field(name='!join', value='Joins voice channel.', inline=False)
-    help_embed.add_field(name='!leave', value='Leaves voice channel.', inline=False)
-    help_embed.add_field(name='!play', value='Play a song followed by a URL.', inline=False)
-    help_embed.add_field(name='!pause', value='Pauses the current song playing.', inline=False)
-    help_embed.add_field(name='!resume', value='Resumes the current song paused.', inline=False)
+    )
+
+    # Add your commands and descriptions here
+    help_embed.add_field(name='!hello', value='Greets the user with a hello message.', inline=False)
+    help_embed.add_field(name='!join', value='Bot joins the voice channel of the user.', inline=False)
+    help_embed.add_field(name='!leave', value='Bot leaves the voice channel.', inline=False)
+    help_embed.add_field(name='!play [URL]', value='Plays a song from the provided YouTube URL.', inline=False)
+    help_embed.add_field(name='!pause', value='Pauses the currently playing song.', inline=False)
+    help_embed.add_field(name='!resume', value='Resumes the paused song.', inline=False)
+    # Add more commands as needed
+
     await ctx.send(embed=help_embed)
 
 

@@ -71,8 +71,7 @@ async def play_music(ctx, url):
             #url = info['formats'][0]['url']
             url = info['url']
 
-            executable = r'C:\Users\blake\ffmpeg-2023-10-23-git-ff5a3575fe-full_build\bin\ffmpeg.exe'
-            voice_client.play(discord.FFmpegPCMAudio(url, executable=executable))
+            voice_client.play(discord.FFmpegPCMAudio(url))
         else:
             # If the bot is not connected, connect and play the music
             ydl_opts = {
@@ -91,8 +90,7 @@ async def play_music(ctx, url):
 
             # Connect to the voice channel
             voice_client = await voice_channel.connect()
-            executable = r'C:\Users\blake\ffmpeg-2023-10-23-git-ff5a3575fe-full_build\bin\ffmpeg.exe'
-            voice_client.play(discord.FFmpegPCMAudio(url, executable=executable))
+            voice_client.play(discord.FFmpegPCMAudio(url))
     else:
         await ctx.send("You need to be in a voice channel to use this command.")
 

@@ -131,12 +131,12 @@ async def help(ctx):
         description='Current List of available commands:',
         color=discord.Color.blue()
     ) # Bot commands and their purposes of the Server
-    help_embed.add_field(name='!command', value='Description', inline=False) # For !command enter the command and for 'Description enter what the command does'
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
-    help_embed.add_field(name='!command', value='Description', inline=False)
+    help_embed.add_field(name='!hello', value='Welcomes user to the channel.', inline=False) # For !command enter the command and for 'Description enter what the command does'
+    help_embed.add_field(name='!join', value='Joins voice channel.', inline=False)
+    help_embed.add_field(name='!leave', value='Leaves voice channel.', inline=False)
+    help_embed.add_field(name='!play', value='Play a song followed by a URL.', inline=False)
+    help_embed.add_field(name='!pause', value='Pauses the current song playing.', inline=False)
+    help_embed.add_field(name='!resume', value='Resumes the current song paused.', inline=False)
     await ctx.send(embed=help_embed)
 
 

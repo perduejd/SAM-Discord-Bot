@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import yt_dlp
 intents = discord.Intents.default()
 intents.message_content = True
 intents.typing = True
@@ -43,6 +44,58 @@ async def leave(ctx):
         await ctx.voice_client.disconnect()
     else:
         await ctx.send("I'm not connected to a voice channel.")
+
+@bot.command()
+async def play(ctx, url):
+    await play_music(ctx, url)
+
+
+async def play_music(ctx, url):
+    voice_channel = ctx.author.voice.channel
+    voice_client = ctx.voice_client  # Get the voice client
+
+    if voice_channel:
+        if voice_client:
+            # If the bot is already connected, play the music
+            ydl_opts = {
+                'format': 'bestaudio/best',
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'opus',  # Attempt Opus format
+                    'preferredquality': '192',
+                }]
+            }
+
+            ydl = yt_dlp.YoutubeDL(ydl_opts)
+            info = ydl.extract_info(url, download=False)
+            #url = info['formats'][0]['url']
+            url = info['url']
+
+            executable = r'C:\Users\blake\ffmpeg-2023-10-23-git-ff5a3575fe-full_build\bin\ffmpeg.exe'
+            voice_client.play(discord.FFmpegPCMAudio(url, executable=executable))
+        else:
+            # If the bot is not connected, connect and play the music
+            ydl_opts = {
+                'format': 'bestaudio/best',
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'opus',  # Attempt Opus format
+                    'preferredquality': '192',
+                }]
+            }
+
+            ydl = yt_dlp.YoutubeDL(ydl_opts)
+            info = ydl.extract_info(url, download=False)
+            #url = info['formats'][0]['url']
+            url = info['url']
+
+            # Connect to the voice channel
+            voice_client = await voice_channel.connect()
+            executable = r'C:\Users\blake\ffmpeg-2023-10-23-git-ff5a3575fe-full_build\bin\ffmpeg.exe'
+            voice_client.play(discord.FFmpegPCMAudio(url, executable=executable))
+    else:
+        await ctx.send("You need to be in a voice channel to use this command.")
+
 
 # Run the bot with your token
 bot.run('MTE2MzkwODk0MzIxNTYwNzgwOA.GWH3bK.9y-b9XVIRtdX7DYiMwuzIr-9UnM-ag2D-wgFcE')

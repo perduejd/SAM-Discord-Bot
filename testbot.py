@@ -146,4 +146,4 @@ async def helpme(ctx):
 
 
 # Run the bot with your token
-bot.run('MTE2MzkwODk0MzIxNTYwNzgwOA.GWH3bK.9y-b9XVIRtdX7DYiMwuzIr-9UnM-ag2D-wgFcE')
+bot.run(BOT_TOKEN)
